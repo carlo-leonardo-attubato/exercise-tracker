@@ -42,5 +42,25 @@
   },
   "leg curl": {
     "hamstring": 1.0
+  },
+  "machine back extension": {
+    "lower-back": 1.0,
+    "gluteal": 0.3
+  },
+  "cable crunch": {
+    "abs": 1.0
+  },
+  "cable woodchop": {
+    "obliques": 1.0,
+    "abs": 0.3
+  },
+  "hip adduction": {
+    "adductor": 1.0
+  },
+  "hip abduction": {
+    "abductors": 1.0
+  },
+  "neck curl": {
+    "neck": 1.0
   }
 }

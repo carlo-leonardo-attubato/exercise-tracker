@@ -15,7 +15,7 @@ from analyze import (
 )
 from formulas import mayhew
 
-# All muscles from react-body-highlighter
+# All muscles from react-body-highlighter (minus head)
 ALL_MUSCLES = [
     "trapezius",
     "upper-back",
@@ -34,7 +34,6 @@ ALL_MUSCLES = [
     "abductors",
     "calves",
     "gluteal",
-    "head",
     "neck",
 ]
 
