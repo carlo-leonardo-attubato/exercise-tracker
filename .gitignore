@@ -1,0 +1,15 @@
+# Personal user data
+user_data/.*
+user_data/data.js
+
+# Dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.mypy_cache/
+
+# IDE/tools
+.claude/
+.DS_Store

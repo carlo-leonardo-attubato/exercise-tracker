@@ -1,0 +1,13 @@
+exercise,sex,weight_kg,beginner,novice,intermediate,advanced,elite,source
+calf raise,male,65,24,58,111,180,262,strengthlevel.com/strength-standards/machine-calf-raise/kg
+bicep curl,male,65,14,25,40,58,78,strengthlevel.com/strength-standards/barbell-curl/kg
+pec fly,male,65,28,47,73,104,139,strengthlevel.com/strength-standards/machine-chest-fly/kg
+seated row,male,65,35,52,73,97,124,strengthlevel.com/strength-standards/seated-cable-row/kg
+chest press,male,65,27,48,77,112,151,strengthlevel.com/strength-standards/chest-press/kg
+tricep extension,male,65,14,27,47,72,100,strengthlevel.com/strength-standards/tricep-pushdown/kg
+shoulder press,male,65,19,37,62,93,129,strengthlevel.com/strength-standards/machine-shoulder-press/kg
+leg press,male,65,69,117,181,258,345,strengthlevel.com/strength-standards/sled-leg-press/kg
+leg extension,male,65,31,54,85,123,165,strengthlevel.com/strength-standards/leg-extension/kg
+leg curl,male,65,25,44,69,101,136,strengthlevel.com/strength-standards/seated-leg-curl/kg
+lateral raise,male,65,3,7,13,22,32,strengthlevel.com/strength-standards/dumbbell-lateral-raise/kg
+shrug,male,65,11,22,38,58,80,strengthlevel.com/strength-standards/dumbbell-shrug/kg

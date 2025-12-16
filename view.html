@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Muscle Progress</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 24px;
+      margin: 0;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 24px; }
+    .subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
+
+    .main { display: flex; gap: 32px; }
+    .left { flex: 0 0 auto; }
+    .right { flex: 1; }
+
+    .body-diagrams { display: flex; gap: 24px; margin-bottom: 24px; }
+    .body-diagram { text-align: center; }
+    .body-diagram h3 { margin: 0 0 8px 0; font-size: 13px; color: #888; }
+
+    .heatmap { display: inline-grid; gap: 2px; font-size: 12px; }
+    .cell { padding: 8px 12px; text-align: center; border-radius: 2px; }
+    .header { background: #333; font-weight: 600; }
+    .label { background: #222; text-align: left; min-width: 120px; cursor: pointer; transition: background 0.2s; }
+    .label:hover { background: #333; }
+    .label.active { background: #633; }
+    .no-data { background: #2a2a2a; color: #555; }
+
+    .chart-container { margin-top: 24px; }
+    .chart-title { font-size: 14px; margin-bottom: 12px; color: #aaa; }
+    #chart { background: #1a1a1a; border-radius: 4px; }
+
+    .score-legend { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-size: 12px; color: #888; }
+    .score-box { width: 14px; height: 14px; border-radius: 2px; }
+
+    /* Body highlighter overrides */
+    .rbh { background: transparent !important; }
+  </style>
+</head>
+<body>
+  <h1>Muscle Group Progress</h1>
+  <div class="subtitle" id="subtitle"></div>
+
+  <div class="main">
+    <div class="left">
+      <div id="body-container"></div>
+      <div id="heatmap-container"></div>
+    </div>
+
+    <div class="right">
+      <div class="chart-container">
+        <div class="chart-title" id="chart-title">Select a muscle to see progression</div>
+        <canvas id="chart" width="500" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="score-legend">
+    <span>0</span>
+    <div style="width:200px;height:14px;border-radius:2px;background:linear-gradient(to right,rgb(180,40,40),rgb(200,120,50),rgb(200,180,60),rgb(60,160,100),rgb(50,120,180),rgb(140,80,180))"></div>
+    <span>500</span>
+    <span style="margin-left:16px;color:#555">|</span>
+    <div style="display:flex;align-items:center;gap:6px"><div class="score-box no-data"></div>No data</div>
+  </div>
+
+  <script src="user_data/data.js"></script>
+  <script>
+    function scoreToColor(score) {
+      if (score === null) return null;
+      const stops = [
+        [0, [180, 40, 40]], [100, [200, 120, 50]], [200, [200, 180, 60]],
+        [300, [60, 160, 100]], [400, [50, 120, 180]], [500, [140, 80, 180]]
+      ];
+      score = Math.max(0, Math.min(500, score));
+      for (let i = 0; i < stops.length - 1; i++) {
+        const [s0, c0] = stops[i];
+        const [s1, c1] = stops[i + 1];
+        if (score <= s1) {
+          const t = (score - s0) / (s1 - s0);
+          const r = Math.round(c0[0] + t * (c1[0] - c0[0]));
+          const g = Math.round(c0[1] + t * (c1[1] - c0[1]));
+          const b = Math.round(c0[2] + t * (c1[2] - c0[2]));
+          return `rgb(${r},${g},${b})`;
+        }
+      }
+      return `rgb(140,80,180)`;
+    }
+
+    function renderHeatmap() {
+      let html = `<div class="heatmap" style="grid-template-columns: auto repeat(${DATA.dates.length}, 50px);">`;
+      html += `<div class="cell header"></div>`;
+      DATA.dates.forEach(d => { html += `<div class="cell header">${d}</div>`; });
+
+      DATA.muscles.forEach(muscle => {
+        html += `<div class="cell label" data-muscle="${muscle}">${muscle}</div>`;
+        DATA.scores[muscle].forEach(score => {
+          const color = scoreToColor(score);
+          const text = score !== null ? score : "—";
+          if (color) {
+            html += `<div class="cell" style="background:${color}">${text}</div>`;
+          } else {
+            html += `<div class="cell no-data">${text}</div>`;
+          }
+        });
+      });
+      html += `</div>`;
+      document.getElementById('heatmap-container').innerHTML = html;
+
+      document.querySelectorAll('.label[data-muscle]').forEach(el => {
+        el.addEventListener('click', () => {
+          if (window.selectMuscleFromHeatmap) {
+            window.selectMuscleFromHeatmap(el.dataset.muscle);
+          }
+        });
+      });
+    }
+
+    window.renderChart = function(muscle) {
+      const canvas = document.getElementById('chart');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const PAD = { t: 20, r: 20, b: 40, l: 50 };
+      const cw = W - PAD.l - PAD.r;
+      const ch = H - PAD.t - PAD.b;
+
+      ctx.clearRect(0, 0, W, H);
+
+      if (!muscle || !DATA.scores[muscle]) {
+        ctx.fillStyle = '#444';
+        ctx.font = '14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Select a muscle to see progression', W/2, H/2);
+        document.getElementById('chart-title').textContent = 'Select a muscle to see progression';
+        return;
+      }
+
+      document.getElementById('chart-title').textContent = `${muscle} progression`;
+
+      const x = i => PAD.l + (i / (DATA.dates.length - 1)) * cw;
+      const y = v => PAD.t + ch - (v / 500) * ch;
+
+      const bands = [
+        [0, 100, "rgba(150,30,30,0.2)"], [100, 200, "rgba(170,100,50,0.2)"],
+        [200, 300, "rgba(40,130,80,0.2)"], [300, 400, "rgba(40,100,150,0.2)"],
+        [400, 500, "rgba(100,60,150,0.2)"]
+      ];
+      bands.forEach(([y0, y1, color]) => {
+        ctx.fillStyle = color;
+        ctx.fillRect(PAD.l, y(y1), cw, y(y0) - y(y1));
+      });
+
+      ctx.strokeStyle = "#333";
+      ctx.fillStyle = "#666";
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "right";
+      for (let v = 0; v <= 500; v += 100) {
+        ctx.beginPath();
+        ctx.moveTo(PAD.l, y(v));
+        ctx.lineTo(W - PAD.r, y(v));
+        ctx.stroke();
+        ctx.fillText(v, PAD.l - 8, y(v) + 4);
+      }
+
+      ctx.textAlign = "center";
+      DATA.dates.forEach((d, i) => { ctx.fillText(d, x(i), H - PAD.b + 20); });
+
+      const scores = DATA.scores[muscle];
+      const pts = [];
+      scores.forEach((s, i) => { if (s !== null) pts.push([i, s]); });
+
+      if (pts.length > 1) {
+        ctx.strokeStyle = "#c44";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(x(pts[0][0]), y(pts[0][1]));
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(x(pts[i][0]), y(pts[i][1]));
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = "#c44";
+      pts.forEach(([i, s]) => {
+        ctx.beginPath();
+        ctx.arc(x(i), y(s), 6, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    };
+
+    document.getElementById('subtitle').textContent = `Standards for ${DATA.user.weight_kg}kg ${DATA.user.sex}`;
+    renderHeatmap();
+    window.renderChart(null);
+  </script>
+  <script src="bundle.js"></script>
+</body>
+</html>

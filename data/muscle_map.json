@@ -1,0 +1,46 @@
+{
+  "chest press": {
+    "chest": 1.0,
+    "triceps": 0.3,
+    "front-deltoids": 0.3
+  },
+  "pec fly": {
+    "chest": 1.0
+  },
+  "seated row": {
+    "upper-back": 1.0,
+    "back-deltoids": 0.3,
+    "biceps": 0.3
+  },
+  "shoulder press": {
+    "front-deltoids": 1.0,
+    "triceps": 0.3
+  },
+  "lateral raise": {
+    "front-deltoids": 1.0
+  },
+  "shrug": {
+    "trapezius": 1.0
+  },
+  "bicep curl": {
+    "biceps": 1.0,
+    "forearm": 0.5
+  },
+  "tricep extension": {
+    "triceps": 1.0
+  },
+  "calf raise": {
+    "calves": 1.0
+  },
+  "leg press": {
+    "quadriceps": 1.0,
+    "gluteal": 0.5,
+    "hamstring": 0.3
+  },
+  "leg extension": {
+    "quadriceps": 1.0
+  },
+  "leg curl": {
+    "hamstring": 1.0
+  }
+}
