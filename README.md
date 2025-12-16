@@ -4,17 +4,17 @@ Track your gym progress with muscle-by-muscle strength scoring based on [strengt
 
 ## Setup
 
-1. Install dependencies:
+1. Create your user folder (replace `your_name`):
    ```bash
-   npm install
+   mkdir -p user_data/.your_name
    ```
 
-2. Create `user_data/config.json`:
+2. Create `user_data/.your_name/config.json`:
    ```json
    {"user": {"sex": "male", "weight_kg": 70}}
    ```
 
-3. Create `user_data/workouts.jsonl` (one JSON per line):
+3. Create `user_data/.your_name/workouts.jsonl` (one JSON per line):
    ```json
    {"date": "2025-01-01", "exercises": [{"name": "chest press", "sets": [[10, 50], [8, 55]]}]}
    ```
@@ -26,12 +26,7 @@ Track your gym progress with muscle-by-muscle strength scoring based on [strengt
    python3 src/export.py
    ```
 
-2. Build the viewer:
-   ```bash
-   npx esbuild src/app.jsx --bundle --outfile=bundle.js
-   ```
-
-3. Open `view.html` in your browser.
+2. Open `view.html` in your browser.
 
 ## How it works
 
