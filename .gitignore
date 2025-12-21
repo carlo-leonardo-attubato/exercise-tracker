@@ -1,14 +1,5 @@
-# Personal user data (hidden folders and import files)
-user_data/.*
-user_data/*.json
-
-# Dependencies
-node_modules/
-
-# Python
-__pycache__/
-*.pyc
-.mypy_cache/
+# Personal user data
+user_data/
 
 # IDE/tools
 .claude/
