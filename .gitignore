@@ -1,6 +1,6 @@
-# Personal user data
+# Personal user data (hidden folders and import files)
 user_data/.*
-user_data/data.js
+user_data/*.json
 
 # Dependencies
 node_modules/

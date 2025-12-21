@@ -62,5 +62,19 @@
   },
   "neck curl": {
     "neck": 1.0
+  },
+  "wrist curl": {
+    "forearm": 1.0
+  },
+  "reverse fly": {
+    "back-deltoids": 1.0
+  },
+  "hip thrust": {
+    "gluteal": 1.0,
+    "hamstring": 0.3
+  },
+  "lat pulldown": {
+    "upper-back": 1.0,
+    "biceps": 0.3
   }
 }

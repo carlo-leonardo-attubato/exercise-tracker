@@ -1,0 +1,180 @@
+{
+  "male_65": {
+    "calf raise": {
+      "beginner": 24.0,
+      "novice": 58.0,
+      "intermediate": 111.0,
+      "advanced": 180.0,
+      "elite": 262.0,
+      "source": "strengthlevel.com/strength-standards/machine-calf-raise/kg"
+    },
+    "bicep curl": {
+      "beginner": 14.0,
+      "novice": 25.0,
+      "intermediate": 40.0,
+      "advanced": 58.0,
+      "elite": 78.0,
+      "source": "strengthlevel.com/strength-standards/barbell-curl/kg"
+    },
+    "pec fly": {
+      "beginner": 28.0,
+      "novice": 47.0,
+      "intermediate": 73.0,
+      "advanced": 104.0,
+      "elite": 139.0,
+      "source": "strengthlevel.com/strength-standards/machine-chest-fly/kg"
+    },
+    "seated row": {
+      "beginner": 35.0,
+      "novice": 52.0,
+      "intermediate": 73.0,
+      "advanced": 97.0,
+      "elite": 124.0,
+      "source": "strengthlevel.com/strength-standards/seated-cable-row/kg"
+    },
+    "chest press": {
+      "beginner": 27.0,
+      "novice": 48.0,
+      "intermediate": 77.0,
+      "advanced": 112.0,
+      "elite": 151.0,
+      "source": "strengthlevel.com/strength-standards/chest-press/kg"
+    },
+    "tricep extension": {
+      "beginner": 14.0,
+      "novice": 27.0,
+      "intermediate": 47.0,
+      "advanced": 72.0,
+      "elite": 100.0,
+      "source": "strengthlevel.com/strength-standards/tricep-pushdown/kg"
+    },
+    "shoulder press": {
+      "beginner": 19.0,
+      "novice": 37.0,
+      "intermediate": 62.0,
+      "advanced": 93.0,
+      "elite": 129.0,
+      "source": "strengthlevel.com/strength-standards/machine-shoulder-press/kg"
+    },
+    "leg press": {
+      "beginner": 69.0,
+      "novice": 117.0,
+      "intermediate": 181.0,
+      "advanced": 258.0,
+      "elite": 345.0,
+      "source": "strengthlevel.com/strength-standards/sled-leg-press/kg"
+    },
+    "leg extension": {
+      "beginner": 31.0,
+      "novice": 54.0,
+      "intermediate": 85.0,
+      "advanced": 123.0,
+      "elite": 165.0,
+      "source": "strengthlevel.com/strength-standards/leg-extension/kg"
+    },
+    "leg curl": {
+      "beginner": 25.0,
+      "novice": 44.0,
+      "intermediate": 69.0,
+      "advanced": 101.0,
+      "elite": 136.0,
+      "source": "strengthlevel.com/strength-standards/seated-leg-curl/kg"
+    },
+    "lateral raise": {
+      "beginner": 3.0,
+      "novice": 7.0,
+      "intermediate": 13.0,
+      "advanced": 22.0,
+      "elite": 32.0,
+      "source": "strengthlevel.com/strength-standards/dumbbell-lateral-raise/kg"
+    },
+    "shrug": {
+      "beginner": 11.0,
+      "novice": 22.0,
+      "intermediate": 38.0,
+      "advanced": 58.0,
+      "elite": 80.0,
+      "source": "strengthlevel.com/strength-standards/dumbbell-shrug/kg"
+    },
+    "machine back extension": {
+      "beginner": 23.0,
+      "novice": 52.0,
+      "intermediate": 94.0,
+      "advanced": 150.0,
+      "elite": 215.0,
+      "source": "strengthlevel.com/strength-standards/machine-back-extension/kg"
+    },
+    "cable crunch": {
+      "beginner": 14.0,
+      "novice": 34.0,
+      "intermediate": 65.0,
+      "advanced": 105.0,
+      "elite": 153.0,
+      "source": "strengthlevel.com/strength-standards/cable-crunch/kg"
+    },
+    "cable woodchop": {
+      "beginner": 12.0,
+      "novice": 30.0,
+      "intermediate": 58.0,
+      "advanced": 95.0,
+      "elite": 140.0,
+      "source": "strengthlevel.com/strength-standards/cable-woodchop/kg"
+    },
+    "hip adduction": {
+      "beginner": 26.0,
+      "novice": 54.0,
+      "intermediate": 94.0,
+      "advanced": 146.0,
+      "elite": 205.0,
+      "source": "strengthlevel.com/strength-standards/hip-adduction/kg"
+    },
+    "hip abduction": {
+      "beginner": 23.0,
+      "novice": 48.0,
+      "intermediate": 84.0,
+      "advanced": 130.0,
+      "elite": 185.0,
+      "source": "strengthlevel.com/strength-standards/hip-abduction/kg"
+    },
+    "neck curl": {
+      "beginner": 1.0,
+      "novice": 10.0,
+      "intermediate": 34.0,
+      "advanced": 73.0,
+      "elite": 122.0,
+      "source": "strengthlevel.com/strength-standards/neck-curl/kg"
+    },
+    "wrist curl": {
+      "beginner": 2.0,
+      "novice": 15.0,
+      "intermediate": 41.0,
+      "advanced": 80.0,
+      "elite": 130.0,
+      "source": "strengthlevel.com/strength-standards/wrist-curl/kg"
+    },
+    "reverse fly": {
+      "beginner": 2.0,
+      "novice": 6.0,
+      "intermediate": 15.0,
+      "advanced": 27.0,
+      "elite": 42.0,
+      "source": "strengthlevel.com/strength-standards/reverse-fly/kg"
+    },
+    "hip thrust": {
+      "beginner": 32.0,
+      "novice": 63.0,
+      "intermediate": 107.0,
+      "advanced": 163.0,
+      "elite": 227.0,
+      "source": "strengthlevel.com/strength-standards/hip-thrust/kg"
+    },
+    "lat pulldown": {
+      "beginner": 34.0,
+      "novice": 51.0,
+      "intermediate": 72.0,
+      "advanced": 97.0,
+      "elite": 124.0,
+      "source": "strengthlevel.com/strength-standards/lat-pulldown/kg"
+    }
+  }
+}

@@ -46,6 +46,7 @@ function App() {
     }
   }, [selectedMuscle]);
 
+
   return (
     <div className="body-diagrams">
       <div className="body-diagram">

@@ -15,39 +15,59 @@ from analyze import (
 )
 from formulas import mayhew
 
-# All muscles from react-body-highlighter (minus head)
+# All muscles from react-body-highlighter (minus head), ordered head to feet
 ALL_MUSCLES = [
+    "neck",
     "trapezius",
-    "upper-back",
-    "lower-back",
+    "front-deltoids",
+    "back-deltoids",
     "chest",
+    "upper-back",
     "biceps",
     "triceps",
     "forearm",
-    "back-deltoids",
-    "front-deltoids",
     "abs",
     "obliques",
-    "adductor",
-    "hamstring",
-    "quadriceps",
-    "abductors",
-    "calves",
+    "lower-back",
     "gluteal",
-    "neck",
+    "adductor",
+    "abductors",
+    "quadriceps",
+    "hamstring",
+    "calves",
 ]
 
 
 def get_rolling_scores(workouts, standards, muscle_map, window_days=7):
-    """Calculate rolling max scores for each muscle on each workout date."""
+    """Calculate rolling max scores for each muscle on each workout date.
+
+    Returns:
+        dates: list of date strings
+        scores: dict of muscle -> list of scores (with backfill)
+        trained: dict of muscle -> list of bools (True if trained that day)
+    """
     inverted = invert_muscle_map(muscle_map)
     dates = sorted(set(w["date"] for w in workouts))
 
+    # Build a map of date -> exercises done that day
+    exercises_by_date = {}
+    for session in workouts:
+        d = session["date"]
+        exercises_by_date[d] = set(ex["name"] for ex in session["exercises"] if "sets" in ex)
+
     result = {muscle: [] for muscle in ALL_MUSCLES}
+    trained = {muscle: [] for muscle in ALL_MUSCLES}
 
     for target_date in dates:
         target_dt = datetime.strptime(target_date, "%Y-%m-%d")
         cutoff = target_dt - timedelta(days=window_days)
+
+        # Which muscles were trained on this specific date?
+        exercises_today = exercises_by_date.get(target_date, set())
+        muscles_today = set()
+        for ex_name in exercises_today:
+            if ex_name in muscle_map:
+                muscles_today.update(muscle_map[ex_name].keys())
 
         for muscle in ALL_MUSCLES:
             exercises = inverted.get(muscle, {})
@@ -83,7 +103,10 @@ def get_rolling_scores(workouts, standards, muscle_map, window_days=7):
             else:
                 result[muscle].append(None)
 
-    return dates, result
+            # Mark trained only if an exercise targeting this muscle was done TODAY
+            trained[muscle].append(muscle in muscles_today)
+
+    return dates, result, trained
 
 
 def get_user_dir():
@@ -117,7 +140,7 @@ def main():
     standards = load_standards("data/standards.csv", sex, weight_kg)
     muscle_map = load_muscle_map("data/muscle_map.json")
 
-    dates, scores = get_rolling_scores(workouts, standards, muscle_map)
+    dates, scores, trained = get_rolling_scores(workouts, standards, muscle_map)
 
     # Format dates as MM-DD
     dates_short = [d[5:] for d in dates]
@@ -126,6 +149,7 @@ def main():
         "dates": dates_short,
         "muscles": ALL_MUSCLES,
         "scores": scores,
+        "trained": trained,
         "user": {"sex": sex, "weight_kg": weight_kg},
     }
 
